@@ -51,7 +51,44 @@ const Login = () => {
 
   const handlePasswordInput = (e) => setPassword(e.target.value);
 
-  return <div>Login</div>;
+  return isLoading ? (
+    <h1>Loading...</h1>
+  ) : (
+    <section className="login">
+      <p
+        ref={errRef}
+        className={errMsg ? "errmsg" : "offscreen"}
+        aria-live="assertive"
+      >
+        {errMsg}
+      </p>
+
+      <h1>Employee Login</h1>
+
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          ref={userRef}
+          value={user}
+          onChange={handleUserInput}
+          autoComplete="off"
+          required
+        />
+
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          onChange={handlePwdInput}
+          value={pwd}
+          required
+        />
+        <button>Sign In</button>
+      </form>
+    </section>
+  );
 };
 
 export default Login;
